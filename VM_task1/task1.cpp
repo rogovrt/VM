@@ -1,3 +1,5 @@
+//Solve system of equations {x^2+y^2-1=0 ; tgx-y=0}
+
 #include <iostream>
 #include <cmath>
 #include <array>
