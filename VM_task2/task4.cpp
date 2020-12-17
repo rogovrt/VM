@@ -12,7 +12,7 @@ void print_vector(const std::vector <long double>& x) {
 std::pair <long double, long double> f(const std::pair <long double, long double>& u, long double x) {
     std::pair <long double, long double> f;
     f.first = u.second;
-    f.second = -(pow(x, 2) - 3)*u.second - (pow(x, 2) - 3)*coshl(x)*u.first + 2 - 6*x + (pow(x, 2) - 3)*exp2l(x)*sinhl(x)*(1+coshl(x))+
+    f.second = -(pow(x, 2) - 3)*u.second - (pow(x, 2) - 3)*coshl(x)*u.first + 2 - 6*x + 2*pow(x, 3)+ (pow(x, 2) - 3)*expl(x)*sinhl(x)*(1+coshl(x))+
             coshl(x)*(expl(x)+pow(x,2)-1+pow(x, 4)-3*pow(x,2));
     return f;
 }
@@ -79,12 +79,11 @@ long double F(long double z) {
 int main() {
     std::cout.setf(std::ios::fixed);
     std::cout.precision(6);
-    //long double k = pow(M_PI, 2);
-    //print_vector(solve(-35.));
-    //print_vector(solve(-40.));
+    print_vector(solve(-93.));
+    print_vector(solve(-92.));
     long double z_mid = 0.;
-    long double z0 = -35;
-    long double z1 = -40;
+    long double z0 = -93.;
+    long double z1 = -92.;
     while(fabsl(F(z_mid)) > .0001) {
         z_mid = (z0 + z1) / 2;
         if ((F(z0)*F(z_mid)) < 0)
