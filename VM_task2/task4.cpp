@@ -38,11 +38,11 @@ std::pair <long double, long double> sum4(const std::pair <long double, long dou
     std::pair <long double, long double> u4;
     u4.first = u0.first + u1.first + u2.first + u3.first;
     u4.second = u0.second + u1.second + u2.second + u3.second;
-    return u1;
+    return u4;
 }
 
 std::vector <long double> solve(long double y1) {
-    std::pair <long double, long double> u0(0, y1);
+    std::pair <long double, long double> u0{0, y1};
     std::pair <long double, long double> u1;
     std::pair <long double, long double> f1;
     std::pair <long double, long double> f2;
@@ -54,9 +54,9 @@ std::vector <long double> solve(long double y1) {
     long double x = 0;
     while (x < 3.1416) {
         f1 = f(u0, x);
-        f2 = f(sum(u0, mult(h/2, f1)), x);
-        f3 = f(sum(u0, mult(h/2, f2)), x);
-        f4 = f(sum(u0, mult(h, f3)), x);
+        f2 = f(sum(u0, mult(h/2, f1)), x + h/2);
+        f3 = f(sum(u0, mult(h/2, f2)), x + h/2);
+        f4 = f(sum(u0, mult(h, f3)), x + h);
         u_ = sum4(f1, mult(2, f2), mult(2, f3), f4);
         u1 = sum(u0, mult(h/6, u_));
         //if ((i % 10000) == 0) {j++; std::cout << u1.first << "; " << j << std::endl;}
@@ -79,11 +79,11 @@ long double F(long double z) {
 int main() {
     std::cout.setf(std::ios::fixed);
     std::cout.precision(6);
-    print_vector(solve(-93.));
-    print_vector(solve(-92.));
+    print_vector(solve(79.3));
+    print_vector(solve(79.4));
     long double z_mid = 0.;
-    long double z0 = -93.;
-    long double z1 = -92.;
+    long double z0 = 79.3;
+    long double z1 = 79.4;
     while(fabsl(F(z_mid)) > .0001) {
         z_mid = (z0 + z1) / 2;
         if ((F(z0)*F(z_mid)) < 0)
